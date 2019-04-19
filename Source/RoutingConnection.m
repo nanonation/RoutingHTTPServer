@@ -75,14 +75,14 @@
 
 - (void)responseHasAvailableData:(NSObject<HTTPResponse> *)sender {
 	HTTPResponseProxy *proxy = (HTTPResponseProxy *)httpResponse;
-	if (proxy.response == sender) {
+	if ((proxy == sender) || ([proxy respondsToSelector:@selector(response)] && (proxy.response == sender))) {
 		[super responseHasAvailableData:httpResponse];
 	}
 }
 
 - (void)responseDidAbort:(NSObject<HTTPResponse> *)sender {
 	HTTPResponseProxy *proxy = (HTTPResponseProxy *)httpResponse;
-	if (proxy.response == sender) {
+    if ((proxy == sender) || ([proxy respondsToSelector:@selector(response)] && (proxy.response == sender))) {
 		[super responseDidAbort:httpResponse];
 	}
 }
